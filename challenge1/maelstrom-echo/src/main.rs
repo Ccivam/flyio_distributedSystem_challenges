@@ -24,7 +24,18 @@ async fn main() {
         let message_type=input1["body"]["type"].as_str().unwrap_or("failed to read type os message");
 
 
-        if message_type=="echo"{
+        if message_type=="init"{
+            let response=json!({
+                "src":input1["body"]["node_id"],
+                "dest":input1["src"],
+                "body":{
+                    "type":"init_ok",
+                    "in_reply_to":input1["body"]["msg_id"]
+                }
+            });
+
+            println!("{}",response);
+        }else if message_type=="echo"{
 
             
             let response=json!({
@@ -40,11 +51,12 @@ async fn main() {
 
             println!("{}",response.to_string());
         }else{
-            println!("Unknown message type: {}", message_type);
+            eprintln!("Unknown message type: {}", message_type);
         }
     });
     
     }
+    
 
 
 }
