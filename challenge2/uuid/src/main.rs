@@ -78,7 +78,7 @@ async fn main() {
     saved_node_id = Some(node_id);
 
     println!("{}", json!({
-        "src": node_name,
+    "src": node_name,
         "dest": input1["src"],
         "body": {
             "type": "init_ok",
